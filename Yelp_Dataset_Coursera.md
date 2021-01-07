@@ -177,144 +177,148 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 	
 	SQL code used to arrive at answer:
 		
-		```sql
-		SELECT stars,
-			   SUM(review_count) AS count
-		FROM business
-		WHERE city == 'Avon'
-		GROUP BY stars		
-		```
+	```sql
+	SELECT stars,
+		   SUM(review_count) AS count
+	FROM business
+	WHERE city == 'Avon'
+	GROUP BY stars		
+	```
 		
 	Copy and Paste the Resulting Table Below (2 columns - star rating and count):
-```	
-+-------+-------+
-| stars | count |
-+-------+-------+
-|   1.5 |    10 |
-|   2.5 |     6 |
-|   3.5 |    88 |
-|   4.0 |    21 |
-|   4.5 |    31 |
-|   5.0 |     3 |
-+-------+-------+	
-```	
+	```	
+	+-------+-------+
+	| stars | count |
+	+-------+-------+
+	|   1.5 |    10 |
+	|   2.5 |     6 |
+	|   3.5 |    88 |
+	|   4.0 |    21 |
+	|   4.5 |    31 |
+	|   5.0 |     3 |
+	+-------+-------+	
+	```	
 	
 	ii. Beachwood
 
-		SQL code used to arrive at answer:
-```sql	
-SELECT stars,
-	   SUM(review_count) AS count
-FROM business
-WHERE city == 'Beachwood'
-GROUP BY stars
-```
-		Copy and Paste the Resulting Table Below (2 columns - star rating and count):
-```sql
-+-------+-------+
-| stars | count |
-+-------+-------+
-|   2.0 |     8 |
-|   2.5 |     3 |
-|   3.0 |    11 |
-|   3.5 |     6 |
-|   4.0 |    69 |
-|   4.5 |    17 |
-|   5.0 |    23 |
-+-------+-------+
-```
+	SQL code used to arrive at answer:
+	```sql	
+	SELECT stars,
+		   SUM(review_count) AS count
+	FROM business
+	WHERE city == 'Beachwood'
+	GROUP BY stars
+	```
+	Copy and Paste the Resulting Table Below (2 columns - star rating and count):
+	```sql
+	+-------+-------+
+	| stars | count |
+	+-------+-------+
+	|   2.0 |     8 |
+	|   2.5 |     3 |
+	|   3.0 |    11 |
+	|   3.5 |     6 |
+	|   4.0 |    69 |
+	|   4.5 |    17 |
+	|   5.0 |    23 |
+	+-------+-------+
+	```
 
 7. Find the top 3 users based on their total number of reviews:
 	
 	SQL code used to arrive at answer:
-```sql
-SELECT id,
-	   name,
-	   review_count
-FROM user
-ORDER BY review_count DESC
-LIMIT 3
-```
-		
+	```sql
+	SELECT id,
+		   name,
+		   review_count
+	FROM user
+	ORDER BY review_count DESC
+	LIMIT 3
+	```
 	Copy and Paste the Result Below:
-```	
-+------------------------+--------+--------------+
-| id                     | name   | review_count |
-+------------------------+--------+--------------+
-| -G7Zkl1wIWBBmD0KRy_sCw | Gerald |         2000 |
-| -3s52C4zL_DHRK0ULG6qtg | Sara   |         1629 |
-| -8lbUNlXVSoXqaRRiHiSNg | Yuri   |         1339 |
-+------------------------+--------+--------------+
-```
+	```	
+	+------------------------+--------+--------------+
+	| id                     | name   | review_count |
+	+------------------------+--------+--------------+
+	| -G7Zkl1wIWBBmD0KRy_sCw | Gerald |         2000 |
+	| -3s52C4zL_DHRK0ULG6qtg | Sara   |         1629 |
+	| -8lbUNlXVSoXqaRRiHiSNg | Yuri   |         1339 |
+	+------------------------+--------+--------------+
+	```
 8. Does posing more reviews correlate with more fans?
-```sql
-SELECT id,
-	   name,
-	   review_count,
-	   fans,
-	   yelping_since
-FROM user
-ORDER BY fans + review_count DESC
-```
+	Code Used:
+	```sql
+	SELECT id,
+		   name,
+		   review_count,
+		   fans,
+		   yelping_since
+	FROM user
+	ORDER BY fans + review_count DESC
+	```
 	Please explain your findings and interpretation of the results:
-		To a certain extent, posing more reviews doescorrelate with more fans. However, it is important to notice that the time spent yelping is also a confounding variable in the current scenario. The longer a user has been yelping the more reviews they would have posted and the more people they have associated with and hence acquired more fans.
-
+	```
+	To a certain extent, posing more reviews doescorrelate with more fans. However, it is important to notice that the time spent yelping is also a confounding variable in the current scenario. The longer a user has been yelping the more reviews they would have posted and the more people they have associated with and hence acquired more fans.
+	```
 	
 9. Are there more reviews with the word "love" or with the word "hate" in them?
-
 	Answer:
 	```
-		There are more reviews with the word 'love'
+	There are more reviews with the word 'love'
 	```
 	SQL code used to arrive at answer:
-```sql
-SELECT count(text)
-FROM review
-where text like '%love%'
-	--1780
-```
-```sql
-SELECT count(text)		
-FROM review
-where text like '%hate'
-	--232
-```	
+	```sql
+	SELECT count(text)
+	FROM review
+	where text like '%love%'
+		--1780
+	```
+	```sql
+	SELECT count(text)		
+	FROM review
+	where text like '%hate'
+		--232
+	```	
 	
 10. Find the top 10 users with the most fans:
 
 	SQL code used to arrive at answer:
-		SELECT id, name, fans
-		FROM user
-		ORDER BY FANS DESC
-		LIMIT 10		
-	
+	```SQL
+	SELECT id, name, fans
+	FROM user
+	ORDER BY FANS DESC
+	LIMIT 10		
+	```
 	Copy and Paste the Result Below:
-		+------------------------+-----------+------+
-		| id                     | name      | fans |
-		+------------------------+-----------+------+
-		| -9I98YbNQnLdAmcYfb324Q | Amy       |  503 |
-		| -8EnCioUmDygAbsYZmTeRQ | Mimi      |  497 |
-		| --2vR0DIsmQ6WfcSzKWigw | Harald    |  311 |
-		| -G7Zkl1wIWBBmD0KRy_sCw | Gerald    |  253 |
-		| -0IiMAZI2SsQ7VmyzJjokQ | Christine |  173 |
-		| -g3XIcCb2b-BD0QBCcq2Sw | Lisa      |  159 |
-		| -9bbDysuiWeo2VShFJJtcw | Cat       |  133 |
-		| -FZBTkAZEXoP7CYvRV2ZwQ | William   |  126 |
-		| -9da1xk7zgnnfO1uTVYGkA | Fran      |  124 |
-		| -lh59ko3dxChBSZ9U7LfUw | Lissa     |  120 |
-		+------------------------+-----------+------+
-	
+	```
+	+------------------------+-----------+------+
+	| id                     | name      | fans |
+	+------------------------+-----------+------+
+	| -9I98YbNQnLdAmcYfb324Q | Amy       |  503 |
+	| -8EnCioUmDygAbsYZmTeRQ | Mimi      |  497 |
+	| --2vR0DIsmQ6WfcSzKWigw | Harald    |  311 |
+	| -G7Zkl1wIWBBmD0KRy_sCw | Gerald    |  253 |
+	| -0IiMAZI2SsQ7VmyzJjokQ | Christine |  173 |
+	| -g3XIcCb2b-BD0QBCcq2Sw | Lisa      |  159 |
+	| -9bbDysuiWeo2VShFJJtcw | Cat       |  133 |
+	| -FZBTkAZEXoP7CYvRV2ZwQ | William   |  126 |
+	| -9da1xk7zgnnfO1uTVYGkA | Fran      |  124 |
+	| -lh59ko3dxChBSZ9U7LfUw | Lissa     |  120 |
+	+------------------------+-----------+------+
+	```
 		
 
-Part 2: Inferences and Analysis
+## Part 2: Inferences and Analysis
 
 1. Pick one city and category of your choice and group the businesses in that city or category by their overall star rating. Compare the businesses with 2-3 stars to the businesses with 4-5 stars and answer the following questions. Include your code.
+	```
 	City: Las Vegas
 	Business: Shopping
-	
+	```
 i. Do the two groups you chose to analyze have a different distribution of hours?
-	From the output it can be observed that the two groups have different distribution of hours. The 4-5 stars businesses seem to have shorter hours however, only three businesses are returned by the query. Therefore this observation may not be conclusive given the small sample size.
-
+	```
+	From the output it can be observed that the two groups have different distribution of hours. The 4-5 stars businesses seem to have shorter hours however, only three 		businesses are returned by the query. Therefore this observation may not be conclusive given the small sample size.
+	```
 ii. Do the two groups you chose to analyze have a different number of reviews?
     Once again, the number of reviews are different for one business named 'Red Rock Canyon Visitor Center'. However this may simply be an outlier, as the other 4-5 star business 'Desert Medical Equipment' has almost equal number of reviews to the 2-3 stars business.
          
