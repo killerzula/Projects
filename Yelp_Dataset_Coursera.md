@@ -319,95 +319,93 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 	```
 	From the output it can be observed that the two groups have different distribution of hours. The 4-5 stars businesses seem to have shorter hours however, only three businesses are returned by the query. Therefore this observation may not be conclusive given the small sample size.
 	```
-ii. Do the two groups you chose to analyze have a different number of reviews?
+	ii. Do the two groups you chose to analyze have a different number of reviews?
 	```
-	Once again, the number of reviews are different for one business named 'Red Rock Canyon Visitor Center'. However this may simply be an outlier, as the other 4-5 star business 'Desert Medical Equipment' has almost equal number of reviews to the 2-3 stars business.
+	Once again, the number of reviews are different for one business named 'Red Rock Canyon Visitor Center'. However this may simply be an outlier, as the other 4-5 star business 'Desert Medical Equipment' has almost equal number of reviews to the 2-3 stars business. 
 	```
-iii. Are you able to infer anything from the location data provided between these two groups? Explain.
+	iii. Are you able to infer anything from the location data provided between these two groups? Explain.
 	```
 	From the postal address all the locations seem to be different as such nothing can be inferred from the location data.
 	```
 
-SQL code used for analysis:
-	SELECT 
-		B.name
-		,CASE
-			WHEN B.stars BETWEEN 2 AND 3 THEN '2-3 stars'
-			WHEN B.stars BETWEEN 4 AND 5 THEN '4-5 stars'
-		END AS star_rating
-		,H.hours
-		,B.review_count
-		,address
-		,CASE
-			WHEN hours LIKE "%monday%" THEN 1
-			WHEN hours LIKE "%tuesday%" THEN 2
-			WHEN hours LIKE "%wednesday%" THEN 3
-			WHEN hours LIKE "%thursday%" THEN 4
-			WHEN hours LIKE "%friday%" THEN 5
-			WHEN hours LIKE "%saturday%" THEN 6
-			WHEN hours LIKE "%sunday%" THEN 7
-		END AS cat
-	FROM business B 
-	
-	INNER JOIN hours H
-	ON B.id = H.business_id
-	
-	INNER JOIN category C
-	ON C.business_id = B.id
-	
-	WHERE (B.city == 'Las Vegas'
-	AND
-	C.category LIKE 'shopping')
-	AND
-	(B.stars BETWEEN 2 AND 3
-	OR
-	B.stars BETWEEN 4 AND 5)
-	
-	GROUP BY stars,cat
-	ORDER BY cat,star_rating ASC
-		
+	SQL code used for analysis:
+	```sql
+		SELECT 
+			B.name
+			,CASE
+				WHEN B.stars BETWEEN 2 AND 3 THEN '2-3 stars'
+				WHEN B.stars BETWEEN 4 AND 5 THEN '4-5 stars'
+			END AS star_rating
+			,H.hours
+			,B.review_count
+			,address
+			,CASE
+				WHEN hours LIKE "%monday%" THEN 1
+				WHEN hours LIKE "%tuesday%" THEN 2
+				WHEN hours LIKE "%wednesday%" THEN 3
+				WHEN hours LIKE "%thursday%" THEN 4
+				WHEN hours LIKE "%friday%" THEN 5
+				WHEN hours LIKE "%saturday%" THEN 6
+				WHEN hours LIKE "%sunday%" THEN 7
+			END AS cat
+		FROM business B 
+		INNER JOIN hours H
+		ON B.id = H.business_id
+		INNER JOIN category C
+		ON C.business_id = B.id
+		WHERE (B.city == 'Las Vegas'
+		AND
+		C.category LIKE 'shopping')
+		AND
+		(B.stars BETWEEN 2 AND 3
+		OR
+		B.stars BETWEEN 4 AND 5)
+		GROUP BY stars,cat
+		ORDER BY cat,star_rating ASC
+	```
 
-OUTPUT:
-	+--------------------------------+-------------+----------------------+--------------+------------------------+-----+
-	| name                           | star_rating | hours                | review_count | address                | cat |
-	+--------------------------------+-------------+----------------------+--------------+------------------------+-----+
-	| Walgreens                      | 2-3 stars   | Monday|8:00-22:00    |            6 | 3808 E Tropicana Ave   |   1 |
-	| Red Rock Canyon Visitor Center | 4-5 stars   | Monday|8:00-16:30    |           32 | 1000 Scenic Loop Dr    |   1 |
-	| Desert Medical Equipment       | 4-5 stars   | Monday|8:00-17:00    |            4 | 3555 W Reno Ave, Ste F |   1 |
-	| Walgreens                      | 2-3 stars   | Tuesday|8:00-22:00   |            6 | 3808 E Tropicana Ave   |   2 |
-	| Red Rock Canyon Visitor Center | 4-5 stars   | Tuesday|8:00-16:30   |           32 | 1000 Scenic Loop Dr    |   2 |
-	| Desert Medical Equipment       | 4-5 stars   | Tuesday|8:00-17:00   |            4 | 3555 W Reno Ave, Ste F |   2 |
-	| Walgreens                      | 2-3 stars   | Wednesday|8:00-22:00 |            6 | 3808 E Tropicana Ave   |   3 |
-	| Red Rock Canyon Visitor Center | 4-5 stars   | Wednesday|8:00-16:30 |           32 | 1000 Scenic Loop Dr    |   3 |
-	| Desert Medical Equipment       | 4-5 stars   | Wednesday|8:00-17:00 |            4 | 3555 W Reno Ave, Ste F |   3 |
-	| Walgreens                      | 2-3 stars   | Thursday|8:00-22:00  |            6 | 3808 E Tropicana Ave   |   4 |
-	| Red Rock Canyon Visitor Center | 4-5 stars   | Thursday|8:00-16:30  |           32 | 1000 Scenic Loop Dr    |   4 |
-	| Desert Medical Equipment       | 4-5 stars   | Thursday|8:00-17:00  |            4 | 3555 W Reno Ave, Ste F |   4 |
-	| Walgreens                      | 2-3 stars   | Friday|8:00-22:00    |            6 | 3808 E Tropicana Ave   |   5 |
-	| Red Rock Canyon Visitor Center | 4-5 stars   | Friday|8:00-16:30    |           32 | 1000 Scenic Loop Dr    |   5 |
-	| Desert Medical Equipment       | 4-5 stars   | Friday|8:00-17:00    |            4 | 3555 W Reno Ave, Ste F |   5 |
-	| Walgreens                      | 2-3 stars   | Saturday|8:00-22:00  |            6 | 3808 E Tropicana Ave   |   6 |
-	| Red Rock Canyon Visitor Center | 4-5 stars   | Saturday|8:00-16:30  |           32 | 1000 Scenic Loop Dr    |   6 |
-	| Walgreens                      | 2-3 stars   | Sunday|8:00-22:00    |            6 | 3808 E Tropicana Ave   |   7 |
-	| Red Rock Canyon Visitor Center | 4-5 stars   | Sunday|8:00-16:30    |           32 | 1000 Scenic Loop Dr    |   7 |
-	+--------------------------------+-------------+----------------------+--------------+------------------------+-----+	
-
+	OUTPUT:
+	```
+		+--------------------------------+-------------+----------------------+--------------+------------------------+-----+
+		| name                           | star_rating | hours                | review_count | address                | cat |
+		+--------------------------------+-------------+----------------------+--------------+------------------------+-----+
+		| Walgreens                      | 2-3 stars   | Monday|8:00-22:00    |            6 | 3808 E Tropicana Ave   |   1 |
+		| Red Rock Canyon Visitor Center | 4-5 stars   | Monday|8:00-16:30    |           32 | 1000 Scenic Loop Dr    |   1 |
+		| Desert Medical Equipment       | 4-5 stars   | Monday|8:00-17:00    |            4 | 3555 W Reno Ave, Ste F |   1 |
+		| Walgreens                      | 2-3 stars   | Tuesday|8:00-22:00   |            6 | 3808 E Tropicana Ave   |   2 |
+		| Red Rock Canyon Visitor Center | 4-5 stars   | Tuesday|8:00-16:30   |           32 | 1000 Scenic Loop Dr    |   2 |
+		| Desert Medical Equipment       | 4-5 stars   | Tuesday|8:00-17:00   |            4 | 3555 W Reno Ave, Ste F |   2 |
+		| Walgreens                      | 2-3 stars   | Wednesday|8:00-22:00 |            6 | 3808 E Tropicana Ave   |   3 |
+		| Red Rock Canyon Visitor Center | 4-5 stars   | Wednesday|8:00-16:30 |           32 | 1000 Scenic Loop Dr    |   3 |
+		| Desert Medical Equipment       | 4-5 stars   | Wednesday|8:00-17:00 |            4 | 3555 W Reno Ave, Ste F |   3 |
+		| Walgreens                      | 2-3 stars   | Thursday|8:00-22:00  |            6 | 3808 E Tropicana Ave   |   4 |
+		| Red Rock Canyon Visitor Center | 4-5 stars   | Thursday|8:00-16:30  |           32 | 1000 Scenic Loop Dr    |   4 |
+		| Desert Medical Equipment       | 4-5 stars   | Thursday|8:00-17:00  |            4 | 3555 W Reno Ave, Ste F |   4 |
+		| Walgreens                      | 2-3 stars   | Friday|8:00-22:00    |            6 | 3808 E Tropicana Ave   |   5 |
+		| Red Rock Canyon Visitor Center | 4-5 stars   | Friday|8:00-16:30    |           32 | 1000 Scenic Loop Dr    |   5 |
+		| Desert Medical Equipment       | 4-5 stars   | Friday|8:00-17:00    |            4 | 3555 W Reno Ave, Ste F |   5 |
+		| Walgreens                      | 2-3 stars   | Saturday|8:00-22:00  |            6 | 3808 E Tropicana Ave   |   6 |
+		| Red Rock Canyon Visitor Center | 4-5 stars   | Saturday|8:00-16:30  |           32 | 1000 Scenic Loop Dr    |   6 |
+		| Walgreens                      | 2-3 stars   | Sunday|8:00-22:00    |            6 | 3808 E Tropicana Ave   |   7 |
+		| Red Rock Canyon Visitor Center | 4-5 stars   | Sunday|8:00-16:30    |           32 | 1000 Scenic Loop Dr    |   7 |
+		+--------------------------------+-------------+----------------------+--------------+------------------------+-----+	
+	```
 2. Group business based on the ones that are open and the ones that are closed. What differences can you find between the ones that are still open and the ones that are closed? List at least two differences and the SQL code you used to arrive at your answer.
 		
 	i. Difference 1:
 		The businesses that are open tend to have more reviews than ones that
 		are closed on average.
 
-			Open:   AVG(review_count) = 31.757
-			Closed: AVG(review_count) = 23.198
+		Open:   AVG(review_count) = 31.757
+		Closed: AVG(review_count) = 23.198
 
 
 	ii. Difference 2:
 		The average star rating is higher for businesses that are open than
 		businesses that are closed.
 
-			Open:   AVG(stars) = 3.679
-			Closed: AVG(stars) = 3.520
+		Open:   AVG(stars) = 3.679
+		Closed: AVG(stars) = 3.520
 
 	SQL code used for analysis:
 	```sql
@@ -421,18 +419,17 @@ OUTPUT:
 	```
 	
 3. For this last part of your analysis, you are going to choose the type of analysis you want to conduct on the Yelp dataset and are going to prepare the data for analysis.
-
-Ideas for analysis include: Parsing out keywords and business attributes for sentiment analysis, clustering businesses to find commonalities or anomalies between them, predicting the overall star rating for a business, predicting the number of fans a user will have, and so on. These are just a few examples to get you started, so feel free to be creative and come up with your own problem you want to solve. Provide answers, in-line, to all of the following:
 	
 	i. Indicate the type of analysis you chose to do:
-		```
-		I would like to do a predictive analysis on whether the business will stay ongoing or will it close in the near future based on the data provided by the yelp database such as location, category, reviews, and ratings. I would also like to analyze whether some variables are more important than others when it comes to decide the success or failure of an ongoing business.
-		```         
-ii. Write 1-2 brief paragraphs on the type of data you will need for your analysis and why you chose that data:
+	```
+	I would like to do a predictive analysis on whether the business will stay ongoing or will it close in the near future based on the data provided by the yelp database such as location, category, reviews, and ratings. I would also like to analyze whether some variables are more important than others when it comes to decide the success or failure of an ongoing business.
+	```         
+	ii. Write 1-2 brief paragraphs on the type of data you will need for your analysis and why you chose that data:
+	```
 	For this analysis I would need the id, name, location, hours distribution, reviews, stars, category and other attributes assigned to the business. This sort of predictive analysis would help us analyze which factors matter the most when it comes to user satisfaction and will also help businesses improve the quality of their services.
-                  
-iii. Output of your finished dataset:
-	+------------------------+--------------------------------+-----------------------------+-------+---------------+-------+-------------+--------------+--------------+---------------+-----------------+----------------+--------------+----------------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
+	```       
+	iii. Output of your finished dataset:
+	```+------------------------+--------------------------------+-----------------------------+-------+---------------+-------+-------------+--------------+--------------+---------------+-----------------+----------------+--------------+----------------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
 	| id                     | name                           | address                     | state | city          | stars | postal_code | review_count | hours_monday | hours_tuesday | hours_wednesday | hours_thursday | hours_friday | hours_saturday | hours_sunday | categories                                                                                                                                                                                                 | attributes                                                                                                                                                                                                                                                                                                                          | is_open |
 	+------------------------+--------------------------------+-----------------------------+-------+---------------+-------+-------------+--------------+--------------+---------------+-----------------+----------------+--------------+----------------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
 	| -0DET7VdEQOJVJ_v6klEug | Flaming Kitchen                | 3235 York Regional Road 7   | ON    | Markham       |   3.0 | L3R 3P9     |           25 | 12:00-23:00  | 12:00-23:00   | 12:00-23:00     | 12:00-23:00    | 12:00-23:00  | 12:00-23:00    | 12:00-23:00  | Asian Fusion,Restaurants                                                                                                                                                                                   | RestaurantsTableService,GoodForMeal,Alcohol,Caters,HasTV,RestaurantsGoodForGroups,NoiseLevel,WiFi,RestaurantsAttire,RestaurantsReservations,OutdoorSeating,RestaurantsPriceRange2,BikeParking,RestaurantsDelivery,Ambience,RestaurantsTakeOut,GoodForKids,BusinessParking                                                           |       1 |
@@ -462,8 +459,9 @@ iii. Output of your finished dataset:
 	| 0e-j5VcEn54EZT-FKCUZdw | Sushi Osaka                    | 5084 Dundas Street W        | ON    | Toronto       |   4.5 | M9A 1C2     |            8 | 11:00-23:00  | 11:00-23:00   | 11:00-23:00     | 11:00-23:00    | 11:00-23:00  | 11:00-23:00    | 14:00-23:00  | Sushi Bars,Restaurants,Japanese,Korean                                                                                                                                                                     | RestaurantsTakeOut,WiFi,RestaurantsGoodForGroups,RestaurantsReservations                                                                                                                                                                                                                                                            |       1 |
 	+------------------------+--------------------------------+-----------------------------+-------+---------------+-------+-------------+--------------+--------------+---------------+-----------------+----------------+--------------+----------------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+---------+
 	(Output limit exceeded, 25 of 70 total rows shown)
-         
-iv. Provide the SQL code you used to create your final dataset:
+         ```
+	iv. Provide the SQL code you used to create your final dataset:
+	```sql
 	SELECT B.id
 			,B.name
 			,B.address
@@ -504,3 +502,4 @@ iv. Provide the SQL code you used to create your final dataset:
 	INNER JOIN attribute A
 	ON B.id = A.business_id
 	GROUP BY B.id
+	```
