@@ -1,4 +1,4 @@
-### Data Scientist Role Play: Profiling and Analyzing the Yelp Dataset Coursera Worksheet
+# Data Scientist Role Play: Profiling and Analyzing the Yelp Dataset Coursera Worksheet
 
 This is a 2-part assignment. In the first part, you are asked a series of questions that will help you profile and understand the data just like a data scientist would. For this first part of the assignment, you will be assessed both on the correctness of your findings, as well as the code you used to arrive at your answer. You will be graded on how easy your code is to read, so remember to use proper formatting and comments where necessary.
 
@@ -9,7 +9,7 @@ In this case, you may want to save as a PDF to ensure your formatting remains in
 
 
 
-Part 1: Yelp Dataset Profiling and Understanding
+## Part 1: Yelp Dataset Profiling and Understanding
 
 1. Profile the data by finding the total number of records for each of the tables below:
 	
@@ -52,7 +52,7 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 	
 	
 	SQL code used to arrive at answer:
-
+```sql
 		SELECT COUNT(*)
 		FROM user
 		WHERE id IS NULL OR 
@@ -75,7 +75,7 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 			compliment_funny IS NULL OR 
 			compliment_writer IS NULL OR 
 			compliment_photos IS NULL 
-
+```
 
 	
 4. For each table and column listed below, display the smallest (minimum), largest (maximum), and average (mean) value for the following fields:
@@ -109,12 +109,13 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 5. List the cities with the most reviews in descending order:
 
 	SQL code used to arrive at answer:
+```sql
 		SELECT city,
 		   SUM(review_count) AS reviews
 		FROM business
 		GROUP BY city
 		ORDER BY reviews DESC
-	
+```
 	Copy and Paste the Result Below:
 		+-----------------+---------+
 		| city            | reviews |
