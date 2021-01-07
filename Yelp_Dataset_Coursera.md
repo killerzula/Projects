@@ -175,9 +175,7 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 
 	i. Avon
 	
-		SQL code used to arrive at answer:
-		
-		
+	SQL code used to arrive at answer:
 		
 		```sql
 		SELECT stars,
@@ -187,7 +185,7 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 		GROUP BY stars		
 		```
 		
-		Copy and Paste the Resulting Table Below (2 columns - star rating and count):
+	Copy and Paste the Resulting Table Below (2 columns - star rating and count):
 ```	
 +-------+-------+
 | stars | count |
