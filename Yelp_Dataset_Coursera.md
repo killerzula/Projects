@@ -40,17 +40,27 @@ In this case, you may want to save as a PDF to ensure your formatting remains in
 2. Find the total distinct records by either the foreign key or primary key for each table. If two foreign keys are listed in the table, please specify which foreign key.
 
 
-i.	Business = id: 10000
-ii. 	Hours = business_id: 1562
-iii. 	Category = business_id: 2643
-iv. 	Attribute = business_id: 1115
-v. 	Review = id:10000, business_id: 8090, user_id: 9581
-vi. 	Checkin = business_id: 493
-vii. 	Photo = id: 10000, business_id: 6493
-viii. 	Tip = user_id: 537, business_id: 3979
-ix. 	User = id: 10000
-x. 	Friend = user_id: 11
-xi. 	Elite_years = user_id: 2780
+	i.	Business = id: 10000
+
+	ii. 	Hours = business_id: 1562
+
+	iii. 	Category = business_id: 2643
+
+	iv. 	Attribute = business_id: 1115
+
+	v. 	Review = id:10000, business_id: 8090, user_id: 9581
+
+	vi. 	Checkin = business_id: 493
+
+	vii. 	Photo = id: 10000, business_id: 6493
+
+	viii. 	Tip = user_id: 537, business_id: 3979
+
+	ix. 	User = id: 10000
+
+	x. 	Friend = user_id: 11
+
+	xi. 	Elite_years = user_id: 2780
 
 Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.	
 
@@ -58,33 +68,35 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 
 3. Are there any columns with null values in the Users table? Indicate "yes," or "no."
 
-	Answer: no
-	
+	Answer: 
+	```
+No
+	```
 	
 	SQL code used to arrive at answer:
 ```sql
-		SELECT COUNT(*)
-		FROM user
-		WHERE id IS NULL OR 
-			name IS NULL OR 
-			review_count IS NULL OR 
-			yelping_since IS NULL OR
-			useful IS NULL OR 
-			funny IS NULL OR 
-			cool IS NULL OR 
-			fans IS NULL OR 
-			average_stars IS NULL OR 
-			compliment_hot IS NULL OR 
-			compliment_more IS NULL OR 
-			compliment_profile IS NULL OR 
-			compliment_cute IS NULL OR 
-			compliment_list IS NULL OR 
-			compliment_note IS NULL OR 
-			compliment_plain IS NULL OR 
-			compliment_cool IS NULL OR 
-			compliment_funny IS NULL OR 
-			compliment_writer IS NULL OR 
-			compliment_photos IS NULL 
+SELECT COUNT(*)
+FROM user
+WHERE id IS NULL OR 
+	name IS NULL OR 
+	review_count IS NULL OR 
+	yelping_since IS NULL OR
+	useful IS NULL OR 
+	funny IS NULL OR 
+	cool IS NULL OR 
+	fans IS NULL OR 
+	average_stars IS NULL OR 
+	compliment_hot IS NULL OR 
+	compliment_more IS NULL OR 
+	compliment_profile IS NULL OR 
+	compliment_cute IS NULL OR 
+	compliment_list IS NULL OR 
+	compliment_note IS NULL OR 
+	compliment_plain IS NULL OR 
+	compliment_cool IS NULL OR 
+	compliment_funny IS NULL OR 
+	compliment_writer IS NULL OR 
+	compliment_photos IS NULL 
 ```
 
 	
@@ -97,7 +109,7 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 	
 	ii. Table: Business, Column: Stars
 	
-		min: 1 		max: 5		avg: 3.6549
+		min: 1 	max: 5		avg: 3.6549
 		
 	
 	iii. Table: Tip, Column: Likes
@@ -119,58 +131,58 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 5. List the cities with the most reviews in descending order:
 
 	SQL code used to arrive at answer:
-```sql
-		SELECT city,
-		   SUM(review_count) AS reviews
-		FROM business
-		GROUP BY city
-		ORDER BY reviews DESC
-```
+	```sql
+	SELECT city,
+	   SUM(review_count) AS reviews
+	FROM business
+	GROUP BY city
+	ORDER BY reviews DESC
+	```
 	Copy and Paste the Result Below:
-```
-		+-----------------+---------+
-		| city            | reviews |
-		+-----------------+---------+
-		| Las Vegas       |   82854 |
-		| Phoenix         |   34503 |
-		| Toronto         |   24113 |
-		| Scottsdale      |   20614 |
-		| Charlotte       |   12523 |
-		| Henderson       |   10871 |
-		| Tempe           |   10504 |
-		| Pittsburgh      |    9798 |
-		| Montréal        |    9448 |
-		| Chandler        |    8112 |
-		| Mesa            |    6875 |
-		| Gilbert         |    6380 |
-		| Cleveland       |    5593 |
-		| Madison         |    5265 |
-		| Glendale        |    4406 |
-		| Mississauga     |    3814 |
-		| Edinburgh       |    2792 |
-		| Peoria          |    2624 |
-		| North Las Vegas |    2438 |
-		| Markham         |    2352 |
-		| Champaign       |    2029 |
-		| Stuttgart       |    1849 |
-		| Surprise        |    1520 |
-		| Lakewood        |    1465 |
-		| Goodyear        |    1155 |
-		+-----------------+---------+
-```
+	```
+	+-----------------+---------+
+	| city            | reviews |
+	+-----------------+---------+
+	| Las Vegas       |   82854 |
+	| Phoenix         |   34503 |
+	| Toronto         |   24113 |
+	| Scottsdale      |   20614 |
+	| Charlotte       |   12523 |
+	| Henderson       |   10871 |
+	| Tempe           |   10504 |
+	| Pittsburgh      |    9798 |
+	| Montréal        |    9448 |
+	| Chandler        |    8112 |
+	| Mesa            |    6875 |
+	| Gilbert         |    6380 |
+	| Cleveland       |    5593 |
+	| Madison         |    5265 |
+	| Glendale        |    4406 |
+	| Mississauga     |    3814 |
+	| Edinburgh       |    2792 |
+	| Peoria          |    2624 |
+	| North Las Vegas |    2438 |
+	| Markham         |    2352 |
+	| Champaign       |    2029 |
+	| Stuttgart       |    1849 |
+	| Surprise        |    1520 |
+	| Lakewood        |    1465 |
+	| Goodyear        |    1155 |
+	+-----------------+---------+
+	```
 	
 6. Find the distribution of star ratings to the business in the following cities:
 
 	i. Avon
 	
 		SQL code used to arrive at answer:
-```sql
-	SELECT stars,
-		   SUM(review_count) AS count
-	FROM business
-	WHERE city == 'Avon'
-	GROUP BY stars		
-```
+		```sql
+		SELECT stars,
+			   SUM(review_count) AS count
+		FROM business
+		WHERE city == 'Avon'
+		GROUP BY stars		
+		```
 		
 		Copy and Paste the Resulting Table Below (2 columns - star rating and count):
 ```	
