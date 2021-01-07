@@ -74,30 +74,30 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 	```
 	
 	SQL code used to arrive at answer:
-```sql
-SELECT COUNT(*)
-FROM user
-WHERE id IS NULL OR 
-	name IS NULL OR 
-	review_count IS NULL OR 
-	yelping_since IS NULL OR
-	useful IS NULL OR 
-	funny IS NULL OR 
-	cool IS NULL OR 
-	fans IS NULL OR 
-	average_stars IS NULL OR 
-	compliment_hot IS NULL OR 
-	compliment_more IS NULL OR 
-	compliment_profile IS NULL OR 
-	compliment_cute IS NULL OR 
-	compliment_list IS NULL OR 
-	compliment_note IS NULL OR 
-	compliment_plain IS NULL OR 
-	compliment_cool IS NULL OR 
-	compliment_funny IS NULL OR 
-	compliment_writer IS NULL OR 
-	compliment_photos IS NULL 
-```
+	```sql
+	SELECT COUNT(*)
+	FROM user
+	WHERE id IS NULL OR 
+		name IS NULL OR 
+		review_count IS NULL OR 
+		yelping_since IS NULL OR
+		useful IS NULL OR 
+		funny IS NULL OR 
+		cool IS NULL OR 
+		fans IS NULL OR 
+		average_stars IS NULL OR 
+		compliment_hot IS NULL OR 
+		compliment_more IS NULL OR 
+		compliment_profile IS NULL OR 
+		compliment_cute IS NULL OR 
+		compliment_list IS NULL OR 
+		compliment_note IS NULL OR 
+		compliment_plain IS NULL OR 
+		compliment_cool IS NULL OR 
+		compliment_funny IS NULL OR 
+		compliment_writer IS NULL OR 
+		compliment_photos IS NULL 
+	```
 
 	
 4. For each table and column listed below, display the smallest (minimum), largest (maximum), and average (mean) value for the following fields:
@@ -124,7 +124,7 @@ WHERE id IS NULL OR
 	
 	v. Table: User, Column: Review_count
 	
-		min: 0		max: 2000		avg: 24.2995
+		min: 0		max: 2000	avg: 24.2995
 		
 
 
@@ -175,7 +175,8 @@ WHERE id IS NULL OR
 
 	i. Avon
 	
-		SQL code used to arrive at answer:
+	SQL code used to arrive at answer:
+		
 		```sql
 		SELECT stars,
 			   SUM(review_count) AS count
