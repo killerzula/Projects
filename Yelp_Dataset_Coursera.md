@@ -40,16 +40,16 @@ In this case, you may want to save as a PDF to ensure your formatting remains in
 2. Find the total distinct records by either the foreign key or primary key for each table. If two foreign keys are listed in the table, please specify which foreign key.
 
 
-i. 		Business = id: 10000
+i.	Business = id: 10000
 ii. 	Hours = business_id: 1562
 iii. 	Category = business_id: 2643
 iv. 	Attribute = business_id: 1115
-v. 		Review = id:10000, business_id: 8090, user_id: 9581
+v. 	Review = id:10000, business_id: 8090, user_id: 9581
 vi. 	Checkin = business_id: 493
 vii. 	Photo = id: 10000, business_id: 6493
 viii. 	Tip = user_id: 537, business_id: 3979
 ix. 	User = id: 10000
-x. 		Friend = user_id: 11
+x. 	Friend = user_id: 11
 xi. 	Elite_years = user_id: 2780
 
 Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.	
@@ -127,6 +127,7 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 		ORDER BY reviews DESC
 ```
 	Copy and Paste the Result Below:
+```
 		+-----------------+---------+
 		| city            | reviews |
 		+-----------------+---------+
@@ -156,91 +157,92 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 		| Lakewood        |    1465 |
 		| Goodyear        |    1155 |
 		+-----------------+---------+
-
+```
 	
 6. Find the distribution of star ratings to the business in the following cities:
 
 	i. Avon
 	
 		SQL code used to arrive at answer:
-		
-			SELECT stars,
-				   SUM(review_count) AS count
-			FROM business
-			WHERE city == 'Avon'
-			GROUP BY stars		
-	
+```sql
+	SELECT stars,
+		   SUM(review_count) AS count
+	FROM business
+	WHERE city == 'Avon'
+	GROUP BY stars		
+```
 		
 		Copy and Paste the Resulting Table Below (2 columns - star rating and count):
-	
-			+-------+-------+
-			| stars | count |
-			+-------+-------+
-			|   1.5 |    10 |
-			|   2.5 |     6 |
-			|   3.5 |    88 |
-			|   4.0 |    21 |
-			|   4.5 |    31 |
-			|   5.0 |     3 |
-			+-------+-------+	
-	
+```	
++-------+-------+
+| stars | count |
++-------+-------+
+|   1.5 |    10 |
+|   2.5 |     6 |
+|   3.5 |    88 |
+|   4.0 |    21 |
+|   4.5 |    31 |
+|   5.0 |     3 |
++-------+-------+	
+```	
 	
 	ii. Beachwood
 
 		SQL code used to arrive at answer:
-	
-			SELECT stars,
-				   SUM(review_count) AS count
-			FROM business
-			WHERE city == 'Beachwood'
-			GROUP BY stars
-		
+```sql	
+SELECT stars,
+	   SUM(review_count) AS count
+FROM business
+WHERE city == 'Beachwood'
+GROUP BY stars
+```
 		Copy and Paste the Resulting Table Below (2 columns - star rating and count):
-		
-			+-------+-------+
-			| stars | count |
-			+-------+-------+
-			|   2.0 |     8 |
-			|   2.5 |     3 |
-			|   3.0 |    11 |
-			|   3.5 |     6 |
-			|   4.0 |    69 |
-			|   4.5 |    17 |
-			|   5.0 |    23 |
-			+-------+-------+
-
+```sql
++-------+-------+
+| stars | count |
++-------+-------+
+|   2.0 |     8 |
+|   2.5 |     3 |
+|   3.0 |    11 |
+|   3.5 |     6 |
+|   4.0 |    69 |
+|   4.5 |    17 |
+|   5.0 |    23 |
++-------+-------+
+```
 
 7. Find the top 3 users based on their total number of reviews:
 	
 	SQL code used to arrive at answer:
-	
-		SELECT id,
-			   name,
-			   review_count
-		FROM user
-		ORDER BY review_count DESC
-		LIMIT 3	
+```sql
+SELECT id,
+	   name,
+	   review_count
+FROM user
+ORDER BY review_count DESC
+LIMIT 3
+```
 		
 	Copy and Paste the Result Below:
-		
-		+------------------------+--------+--------------+
-		| id                     | name   | review_count |
-		+------------------------+--------+--------------+
-		| -G7Zkl1wIWBBmD0KRy_sCw | Gerald |         2000 |
-		| -3s52C4zL_DHRK0ULG6qtg | Sara   |         1629 |
-		| -8lbUNlXVSoXqaRRiHiSNg | Yuri   |         1339 |
-		+------------------------+--------+--------------+
-
+```	
++------------------------+--------+--------------+
+| id                     | name   | review_count |
++------------------------+--------+--------------+
+| -G7Zkl1wIWBBmD0KRy_sCw | Gerald |         2000 |
+| -3s52C4zL_DHRK0ULG6qtg | Sara   |         1629 |
+| -8lbUNlXVSoXqaRRiHiSNg | Yuri   |         1339 |
++------------------------+--------+--------------+
+```
 8. Does posing more reviews correlate with more fans?
-
-		SELECT id,
-			   name,
-			   review_count,
-			   fans,
-			   yelping_since
-		FROM user
-		ORDER BY fans + review_count DESC
-
+```sql
+SELECT id,
+	   name,
+	   review_count,
+	   fans,
+	   yelping_since
+FROM user
+ORDER BY fans + review_count DESC
+```
 	Please explain your findings and interpretation of the results:
 		To a certain extent, posing more reviews doescorrelate with more fans. However, it is important to notice that the time spent yelping is also a confounding variable in the current scenario. The longer a user has been yelping the more reviews they would have posted and the more people they have associated with and hence acquired more fans.
 
@@ -248,20 +250,22 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 9. Are there more reviews with the word "love" or with the word "hate" in them?
 
 	Answer:
+	```
 		There are more reviews with the word 'love'
-	
+	```
 	SQL code used to arrive at answer:
-		SELECT count(text)
-		FROM review
-		where text like '%love%'
-			:1780
-
-
-		SELECT count(text)		
-		FROM review
-		where text like '%hate'
-			:232
-	
+```sql
+SELECT count(text)
+FROM review
+where text like '%love%'
+	--1780
+```
+```sql
+SELECT count(text)		
+FROM review
+where text like '%hate'
+	--232
+```	
 	
 10. Find the top 10 users with the most fans:
 
