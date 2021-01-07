@@ -70,7 +70,7 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 
 	Answer: 
 	```
-No
+	No
 	```
 	
 	SQL code used to arrive at answer:
