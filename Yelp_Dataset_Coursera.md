@@ -394,38 +394,40 @@ OUTPUT:
 
 2. Group business based on the ones that are open and the ones that are closed. What differences can you find between the ones that are still open and the ones that are closed? List at least two differences and the SQL code you used to arrive at your answer.
 		
-i. Difference 1:
-	The businesses that are open tend to have more reviews than ones that
-	are closed on average.
-	
-		Open:   AVG(review_count) = 31.757
-		Closed: AVG(review_count0 = 23.198
+	i. Difference 1:
+		The businesses that are open tend to have more reviews than ones that
+		are closed on average.
 
-         
-ii. Difference 2:
-	The average star rating is higher for businesses that are open than
-	businesses that are closed.
+			Open:   AVG(review_count) = 31.757
+			Closed: AVG(review_count) = 23.198
 
-		Open:   AVG(stars) = 3.679
-		Closed: AVG(stars) = 3.520
 
-SQL code used for analysis:
-	SELECT COUNT(DISTINCT(id)),
-		   AVG(review_count),
-		   SUM(review_count),
-		   AVG(stars),
-		   is_open
-	FROM business
-	GROUP BY is_open
-	
+	ii. Difference 2:
+		The average star rating is higher for businesses that are open than
+		businesses that are closed.
+
+			Open:   AVG(stars) = 3.679
+			Closed: AVG(stars) = 3.520
+
+	SQL code used for analysis:
+	```sql
+		SELECT COUNT(DISTINCT(id)),
+			   AVG(review_count),
+			   SUM(review_count),
+			   AVG(stars),
+			   is_open
+		FROM business
+		GROUP BY is_open
+	```
 	
 3. For this last part of your analysis, you are going to choose the type of analysis you want to conduct on the Yelp dataset and are going to prepare the data for analysis.
 
 Ideas for analysis include: Parsing out keywords and business attributes for sentiment analysis, clustering businesses to find commonalities or anomalies between them, predicting the overall star rating for a business, predicting the number of fans a user will have, and so on. These are just a few examples to get you started, so feel free to be creative and come up with your own problem you want to solve. Provide answers, in-line, to all of the following:
 	
-i. Indicate the type of analysis you chose to do:
-	I would like to do a predictive analysis on whether the business will stay ongoing or will it close in the near future based on the data provided by the yelp database such as location, category, reviews, and ratings. I would also like to analyze whether some variables are more important than others when it comes to decide the success or failure of an ongoing business.
-         
+	i. Indicate the type of analysis you chose to do:
+		```
+		I would like to do a predictive analysis on whether the business will stay ongoing or will it close in the near future based on the data provided by the yelp database such as location, category, reviews, and ratings. I would also like to analyze whether some variables are more important than others when it comes to decide the success or failure of an ongoing business.
+		```         
 ii. Write 1-2 brief paragraphs on the type of data you will need for your analysis and why you chose that data:
 	For this analysis I would need the id, name, location, hours distribution, reviews, stars, category and other attributes assigned to the business. This sort of predictive analysis would help us analyze which factors matter the most when it comes to user satisfaction and will also help businesses improve the quality of their services.
                   
