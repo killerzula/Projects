@@ -315,16 +315,18 @@ Note: Primary Keys are denoted in the ER-Diagram with a yellow key icon.
 	City: Las Vegas
 	Business: Shopping
 	```
-i. Do the two groups you chose to analyze have a different distribution of hours?
+	i. Do the two groups you chose to analyze have a different distribution of hours?
 	```
-	From the output it can be observed that the two groups have different distribution of hours. The 4-5 stars businesses seem to have shorter hours however, only three 		businesses are returned by the query. Therefore this observation may not be conclusive given the small sample size.
+	From the output it can be observed that the two groups have different distribution of hours. The 4-5 stars businesses seem to have shorter hours however, only three businesses are returned by the query. Therefore this observation may not be conclusive given the small sample size.
 	```
 ii. Do the two groups you chose to analyze have a different number of reviews?
-    Once again, the number of reviews are different for one business named 'Red Rock Canyon Visitor Center'. However this may simply be an outlier, as the other 4-5 star business 'Desert Medical Equipment' has almost equal number of reviews to the 2-3 stars business.
-         
+	```
+	Once again, the number of reviews are different for one business named 'Red Rock Canyon Visitor Center'. However this may simply be an outlier, as the other 4-5 star business 'Desert Medical Equipment' has almost equal number of reviews to the 2-3 stars business.
+	```
 iii. Are you able to infer anything from the location data provided between these two groups? Explain.
+	```
 	From the postal address all the locations seem to be different as such nothing can be inferred from the location data.
-
+	```
 
 SQL code used for analysis:
 	SELECT 
